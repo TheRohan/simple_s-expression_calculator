@@ -75,27 +75,27 @@ object Calculator : IExecute {
      * do calculation depending on action
      */
     private fun applyNewValue(oldValue: Long?, newValue: Long, action: Actions): Long {
-        var result: Long? = oldValue
+        var result = oldValue ?: 0
         when (action) {
             Actions.UNKNOWN -> { //just override
                 result = newValue
             }
             Actions.ADD -> { // +
-                result = if (result == null) {
-                    oldValue
+                result = if (oldValue == null) {
+                    newValue
                 } else {
                     result + newValue
                 }
             }
             Actions.MULTIPLY -> { // *
-                result = if (result == null) {
+                result = if (oldValue == null) {
                     newValue
                 } else {
                     result * newValue
                 }
             }
         }
-        return result ?: 0
+        return result
     }
 
 
